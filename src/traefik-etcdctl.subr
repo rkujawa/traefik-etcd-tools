@@ -1,0 +1,21 @@
+#!/bin/bash
+
+SYSCONFIG=/etc/sysconfig/traefik
+
+sysconfig_traefik_check() {
+
+	if [ -f $SYSCONFIG ] ; then
+		source $SYSCONFIG
+	else
+		echo $SYSCONFIG does not exist. This is no good.
+		exit 1
+	fi
+
+}
+
+sysconfig_traefik_check
+
+# XXX: check if really using API v3!
+ETCDCTL_API=3
+export ETCDCTL_API
+
