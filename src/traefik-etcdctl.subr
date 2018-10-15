@@ -13,9 +13,18 @@ sysconfig_traefik_check() {
 
 }
 
-sysconfig_traefik_check
+etcd_api_check() {
 
-# XXX: check if really using API v3!
-ETCDCTL_API=3
-export ETCDCTL_API
+	if [ $ETCD_USEAPIV3 == "true" ] ; then
+		ETCDCTL_API=3
+		export ETCDCTL_API
+	else
+		echo etcd API v2 not supported, lulz.
+		exit 1
+	fi
+		
+}
+
+sysconfig_traefik_check
+etcd_api_check
 
